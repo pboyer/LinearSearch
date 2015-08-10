@@ -5,7 +5,7 @@ build:
 
 release: build
 	mkdir -p build
-	browserify src/compile.js -o build/linearsearch.js -s linear
+	browserify src/compile.js -o build/linear.js -s linear
 
 test: build
 	node src/test.js

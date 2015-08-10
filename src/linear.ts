@@ -6,12 +6,13 @@ export class SearchOptions {
 }
 
 export class SearchWeights {
-	baseValueWeight: number = 2;
-	sessionCountWeight: number = 2;
-	filterValueWeight: number = 10;
+	baseValueWeight: number = 0;
+	sessionCountWeight: number = 1/50;
+	filterValueWeight: number = 20;
 	localWeights: { [id: number]: number } = {
-		5 : 1,
-		20 : 1/4	
+		2 : 1/4,
+		5 : 1/20,
+		20 : 1/40	
 	};
 }
 
@@ -115,13 +116,13 @@ export class SublimeFilter implements IFilter {
 	private regex: RegExp;
 
 	onBeginSearch(query: string) {
-		this.regex = new RegExp(query.replace(' ', '').split('').join('.*?'));
-		this.regex.compile();
+		var r = query.replace(' ', '').split('').join('.*?');
+		this.regex = new RegExp(r);
 	}
 
 	filter(query: string, element: ISearchElement): number {
 		return Math.max.apply(null, element.tags().map((n) => {
-			return this.regex.test(n) ? query.length / n.length : 0.0;
+			return this.regex.test(n) ? query.length / n.length : 0.0
 		}));
 	}
 }

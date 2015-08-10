@@ -1,7 +1,29 @@
 /// <reference path="../typings/node.d.ts" />
 import * as assert from "assert";
 
-import linear = require('./linearsearch');
+import linear = require('./linear');
+
+(function(){
+	var ls = new linear.SublimeFilter();
+	
+	ls.onBeginSearch("k");
+	
+	var e = new linear.SearchElement(["app"]);
+	
+	assert.equal(0.0, ls.filter("k", e));
+})();
+
+
+(function(){
+	var ls = new linear.Search();
+	
+	ls.add( new linear.SearchElement(["app"]) ); 
+	ls.add( new linear.SearchElement(["apple"]) ); 
+
+	var res = ls.search("k");
+	assert.equal(0, res.length);
+	
+})();
 
 (function(){
 	var ls = new linear.Search();

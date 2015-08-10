@@ -1,9 +1,9 @@
-var linearSearch = require('./linearsearch');
+var linear = require('./linear');
 
-exports = {
-	Search : linearSearch.Search,
-	Filter : linearSearch.SublimeFilter,
-	SearchElement : linearSearch.SearchElement,
-	SearchOptions : linearSearch.SearchOptions,
-	SearchWeights : linearSearch.SearchWeight
+module.exports = {
+	Search : linear.Search,
+	Filter : linear.SublimeFilter,
+	SearchElement : linear.SearchElement,
+	SearchOptions : linear.SearchOptions,
+	SearchWeights : linear.SearchWeight
 };
