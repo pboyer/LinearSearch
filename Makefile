@@ -12,4 +12,4 @@ test: build
 
 clean:
 	rm -rf build
-	rm src/linear.js
+	rm src/linear.js src/test.js
