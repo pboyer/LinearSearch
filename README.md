@@ -6,7 +6,7 @@ LinearSearch incorporates a linear combination of previous search picks to help 
 searchScore = textualCloseness * weight + numberOfPicksInLastN * weightN + ...
 ```
 
-By default, LinearSearch uses a search algorithm similar to the one found in Sublime Text for filtering before sorting.
+By default, LinearSearch uses an algorithm similar to the one found in Sublime Text for filtering before sorting.
 
 ### Usage
 ```js
