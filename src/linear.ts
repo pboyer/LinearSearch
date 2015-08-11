@@ -1,6 +1,6 @@
 export class SearchOptions {
 	filter: IFilter = new SublimeFilter()
-	elements: ISearchElement[] = [];
+	items: ISearchItem[] = [];
 	filterThreshold: number = 0.1;
 	weights : SearchWeights = new SearchWeights();
 }
@@ -18,7 +18,7 @@ export class SearchWeights {
 
 export class Search {
 	private _filter: IFilter;
-	private _elements: ISearchElement[];
+	private _items: ISearchItem[];
 	private _weights : SearchWeights;
 	private _filterThreshold: number;
 
@@ -26,31 +26,31 @@ export class Search {
 		options = options || new SearchOptions();
 		
 		this._filter = options.filter;
-		this._elements = options.elements;
+		this._items = options.items;
 		this._weights = options.weights;
 		this._filterThreshold = options.filterThreshold;
 	}
 
-	search(query: string): ISearchElement[] {
+	search(query: string): ISearchItem[] {
 		this._filter.onBeginSearch(query);
-		this._elements.forEach((e) => e.onBeginSearch(query));
+		this._items.forEach((e) => e.onBeginSearch(query));
 		
-		return this._elements
+		return this._items
 				.filter((e) => this._filterThreshold < (e.lastFilterValue = this._filter.filter(query, e)))
 				.sort((a, b) => b.score(this._weights) - a.score(this._weights));
 	}
 
-	add(element: ISearchElement) {
-		this._elements.push(element);
+	add(item: ISearchItem) {
+		this._items.push(item);
 	}
 	
-	remove(element: ISearchElement) {
-		var i = this._elements.indexOf(element);
-		if (i > -1) this._elements.splice(i,1);
+	remove(item: ISearchItem) {
+		var i = this._items.indexOf(item);
+		if (i > -1) this._items.splice(i,1);
 	}
 }
 
-export interface ISearchElement {
+export interface ISearchItem {
 	lastFilterValue : number;
 	onBeginSearch(query : string);
 	tags() : string[];
@@ -59,7 +59,7 @@ export interface ISearchElement {
 	count( num : number ) : number;
 }
 
-export class SearchElement implements ISearchElement {
+export class SearchItem implements ISearchItem {
 	private _count : number = 0 >>> 0; // 32bit mask
 	private _tags: string[];
 	
@@ -109,7 +109,7 @@ export class SearchElement implements ISearchElement {
 
 export interface IFilter {
 	onBeginSearch(query: string);
-	filter(query: string, element: ISearchElement): number;
+	filter(query: string, element: ISearchItem): number;
 }
 
 export class SublimeFilter implements IFilter {
@@ -120,8 +120,8 @@ export class SublimeFilter implements IFilter {
 		this.regex = new RegExp(r);
 	}
 
-	filter(query: string, element: ISearchElement): number {
-		return Math.max.apply(null, element.tags().map((n) => {
+	filter(query: string, item: ISearchItem): number {
+		return Math.max.apply(null, item.tags().map((n) => {
 			return this.regex.test(n) ? query.length / n.length : 0.0
 		}));
 	}

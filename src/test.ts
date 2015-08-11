@@ -8,7 +8,7 @@ import linear = require('./linear');
 	
 	ls.onBeginSearch("k");
 	
-	var e = new linear.SearchElement(["app"]);
+	var e = new linear.SearchItem(["app"]);
 	
 	assert.equal(0.0, ls.filter("k", e));
 })();
@@ -17,8 +17,8 @@ import linear = require('./linear');
 (function(){
 	var ls = new linear.Search();
 	
-	ls.add( new linear.SearchElement(["app"]) ); 
-	ls.add( new linear.SearchElement(["apple"]) ); 
+	ls.add( new linear.SearchItem(["app"]) ); 
+	ls.add( new linear.SearchItem(["apple"]) ); 
 
 	var res = ls.search("k");
 	assert.equal(0, res.length);
@@ -28,8 +28,8 @@ import linear = require('./linear');
 (function(){
 	var ls = new linear.Search();
 	
-	ls.add( new linear.SearchElement(["app"]) ); 
-	ls.add( new linear.SearchElement(["apple"]) ); 
+	ls.add( new linear.SearchItem(["app"]) ); 
+	ls.add( new linear.SearchItem(["apple"]) ); 
 	
 	// search one time
 	var res1 = ls.search("app");
@@ -47,10 +47,10 @@ import linear = require('./linear');
 (function(){
 	var ls = new linear.Search();
 	 
-	ls.add( new linear.SearchElement(["1app"]) ); 
-	ls.add( new linear.SearchElement(["a1pp"]) ); 
-	ls.add( new linear.SearchElement(["ap1p"]) ); 
-	ls.add( new linear.SearchElement(["app1"]) ); 
+	ls.add( new linear.SearchItem(["1app"]) ); 
+	ls.add( new linear.SearchItem(["a1pp"]) ); 
+	ls.add( new linear.SearchItem(["ap1p"]) ); 
+	ls.add( new linear.SearchItem(["app1"]) ); 
 	
 	// search one time
 	var res1 = ls.search("app");
