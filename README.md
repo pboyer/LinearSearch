@@ -1,6 +1,6 @@
 ### What is it?
 
-LinearSearch incorporates linear combination of previous search picks to help sort search results.
+LinearSearch incorporates a linear combination of previous search picks to help sort search results.
 
 ``` 
 searchScore = textualCloseness * weight + numberOfPicksInLastN * weightN + ...

@@ -10,9 +10,9 @@ export class SearchWeights {
 	sessionCountWeight: number = 1/50;
 	filterValueWeight: number = 20;
 	localWeights: { [id: number]: number } = {
-		2 : 1/4,
-		5 : 1/20,
-		20 : 1/40	
+		2 : 2/5,
+		5 : 2/5,
+		20 : 1/20	
 	};
 }
 
