@@ -13,7 +13,7 @@
         
             var search = new linear.Search();
             words().forEach(function(e){
-                return search.add( new linear.SearchElement([e]) );
+                return search.add( new linear.SearchItem([e]) );
             });
             
             var elements = document.getElementById('elements');

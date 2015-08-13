@@ -21,7 +21,7 @@ By default, LinearSearch uses an algorithm similar to the one found in Sublime T
 	options.sessionWeight = 0.1; 
 	// a dictionary mapping number of past search queries to weights
 	options.weights = {
-		2 : 1 / 2 * ,
+		2 : 1 / 2,
 		10 : 1/10 * 1,
 		20 : 1/20 * 5	
 	}
