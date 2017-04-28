@@ -59,7 +59,7 @@ export interface ISearchItem {
 	lastFilterValue : number;
 	onBeginSearch(query : string) : void;
 	readonly tags : string[];
-	pick();
+	pick() : void;
 	score( weights : SearchWeights ) : number;
 	count( num : number ) : number;
 }
@@ -107,7 +107,7 @@ export class SearchItem implements ISearchItem {
 }
 
 export interface IFilter {
-	onBeginSearch(query: string);
+	onBeginSearch(query: string) : void;
 	filter(query: string, element: ISearchItem): number;
 }
 
