@@ -1,0 +1,27 @@
+{
+  "name": "linearsearch",
+  "version": "1.1.0",
+  "description": "A lightweight, learning algorithm for searching a homogeneous list of items.",
+  "main": "build/linear.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "node src/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pboyer/LinearSearch.git"
+  },
+  "keywords": [
+    "search",
+    "learning",
+    "lightweight"
+  ],
+  "author": "Peter Boyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pboyer/LinearSearch/issues"
+  },
+  "homepage": "https://github.com/pboyer/LinearSearch#readme"
+}

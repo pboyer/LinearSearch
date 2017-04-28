@@ -5,15 +5,20 @@ export class SearchOptions {
 	weights : SearchWeights = new SearchWeights();
 }
 
+export interface ILocalWeight {
+	n : number;
+	weight : number;
+}
+
 export class SearchWeights {
 	baseValueWeight: number = 0;
 	sessionCountWeight: number = 1/50;
 	filterValueWeight: number = 20;
-	localWeights: { [id: number]: number } = {
-		2 : 2/5,
-		5 : 2/5,
-		20 : 1/20	
-	};
+	localWeights : ILocalWeight[] = [
+		{ n : 2, weight : 2/5 },
+		{ n : 5, weight : 2/5 },
+		{ n : 20, weight : 1/20 }
+	];
 }
 
 export class Search {
@@ -45,15 +50,15 @@ export class Search {
 	}
 	
 	remove(item: ISearchItem) {
-		var i = this._items.indexOf(item);
+		let i = this._items.indexOf(item);
 		if (i > -1) this._items.splice(i,1);
 	}
 }
 
 export interface ISearchItem {
 	lastFilterValue : number;
-	onBeginSearch(query : string);
-	tags() : string[];
+	onBeginSearch(query : string) : void;
+	readonly tags : string[];
 	pick();
 	score( weights : SearchWeights ) : number;
 	count( num : number ) : number;
@@ -61,22 +66,19 @@ export interface ISearchItem {
 
 export class SearchItem implements ISearchItem {
 	private _count : number = 0 >>> 0; // 32bit mask
-	private _tags: string[];
+
+	tags: string[];
 	
 	baseValue : number = 0;
 	sessionCount : number = 0;
 	lastFilterValue : number = 0;
 	
 	constructor(tags: string[]) {
-		this._tags = tags;
+		this.tags = tags;
 	}
 
 	onBeginSearch( _ : string ) {
 		this._count = this._count << 1;
-	}
-	
-	tags() : string[] {
-		return this._tags;
 	}
 
 	pick(){
@@ -85,21 +87,18 @@ export class SearchItem implements ISearchItem {
 	}
 	
 	score( weights : SearchWeights ) : number {
-		var score = this.baseValue * weights.baseValueWeight 
+		let score = this.baseValue * weights.baseValueWeight 
 			+ this.sessionCount * weights.sessionCountWeight 
 			+ this.lastFilterValue + weights.filterValueWeight;
 			
-		for (var n in weights.localWeights){
-			score += this.count(n) * weights.localWeights[n];
-		}
-
+		weights.localWeights.forEach((x) => score += this.count(x.n) * x.weight );
 		return score;
 	}
 	
 	count(num : number) : number {
-		var c = this._count;
-		var t = 0;
-		for (var i = 0; i < num; i++){
+		let c = this._count;
+		let t = 0;
+		for (let i = 0; i < num; i++){
 			t += c & 1;
 			c = c >> 1;
 		}
@@ -116,12 +115,12 @@ export class SublimeFilter implements IFilter {
 	private regex: RegExp;
 
 	onBeginSearch(query: string) {
-		var r = query.replace(' ', '').split('').join('.*?');
+		let r = query.replace(' ', '').split('').join('.*?');
 		this.regex = new RegExp(r);
 	}
 
 	filter(query: string, item: ISearchItem): number {
-		return Math.max.apply(null, item.tags().map((n) => {
+		return Math.max.apply(null, item.tags.map((n) => {
 			return this.regex.test(n) ? query.length / n.length : 0.0
 		}));
 	}
