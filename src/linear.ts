@@ -27,7 +27,7 @@ export class Search {
 	private _weights : SearchWeights;
 	private _filterThreshold: number;
 
-	constructor(options?: SearchOptions) {
+	constructor(options?: Partial<SearchOptions>) {
 		options = options || new SearchOptions();
 		
 		this._filter = options.filter;
