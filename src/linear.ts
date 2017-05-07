@@ -28,12 +28,13 @@ export class Search {
 	private _filterThreshold: number;
 
 	constructor(options?: Partial<SearchOptions>) {
-		options = options || new SearchOptions();
+		let defaultOpts = new SearchOptions();
+		options = options || defaultOpts;
 		
-		this._filter = options.filter;
-		this._items = options.items;
-		this._weights = options.weights;
-		this._filterThreshold = options.filterThreshold;
+		this._filter = options.filter || defaultOpts.filter;
+		this._items = options.items || defaultOpts.items;
+		this._weights = options.weights || defaultOpts.weights;
+		this._filterThreshold = options.filterThreshold || defaultOpts.filterThreshold;
 	}
 
 	search(query: string): ISearchItem[] {
