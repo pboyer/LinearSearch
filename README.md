@@ -37,7 +37,13 @@ By default, LinearSearch uses an algorithm similar to the one found in Sublime T
     var res = ls.search("app");
 ```
 
-### Install
+### Install via npm
+
+`npm install linearsearch`
+
+### Build
+
+#### Install prereqs
 
 Install [node.js](http://www.nodejs.org)
 
@@ -46,7 +52,7 @@ Install [node.js](http://www.nodejs.org)
 # npm install -g typescript
 ```
 
-### Build
+#### make
 
 ```
 # make build
