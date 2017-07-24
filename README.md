@@ -1,4 +1,4 @@
-### What is it?
+## What is it?
 
 LinearSearch incorporates a linear combination of previous search picks to help sort search results.
 
@@ -8,7 +8,7 @@ searchScore = textualCloseness * weight + numberOfPicksInLastN * weightN + ...
 
 By default, LinearSearch uses an algorithm similar to the one found in Sublime Text for filtering before sorting.
 
-### Usage
+## Usage
 ```js
 	
 	// override the default options for Search
@@ -37,36 +37,38 @@ By default, LinearSearch uses an algorithm similar to the one found in Sublime T
     var res = ls.search("app");
 ```
 
-### Install via npm
+## Install via npm
 
-`npm install linearsearch`
+```
+npm install linearsearch
+```
 
-### Build
+## Build
 
-#### Install prereqs
+### Install prereqs
 
 Install [node.js](http://www.nodejs.org)
 
 ```
-# npm install -g browserify
-# npm install -g typescript
+npm install -g browserify
+npm install -g typescript
 ```
 
-#### make
+### make
 
 ```
-# make build
+make build
 ```
 
 ## Build for the web
 
 ```
-# make release
+make release
 ```
 Produces linear.js in the build directory
 
-### Test
+## Test
 
 ```
-# make test
+make test
 ```
