@@ -27,13 +27,14 @@ export class Search {
 	private _weights : SearchWeights;
 	private _filterThreshold: number;
 
-	constructor(options?: SearchOptions) {
-		options = options || new SearchOptions();
+	constructor(options?: Partial<SearchOptions>) {
+		let defaultOpts = new SearchOptions();
+		options = options || defaultOpts;
 		
-		this._filter = options.filter;
-		this._items = options.items;
-		this._weights = options.weights;
-		this._filterThreshold = options.filterThreshold;
+		this._filter = options.filter || defaultOpts.filter;
+		this._items = options.items || defaultOpts.items;
+		this._weights = options.weights || defaultOpts.weights;
+		this._filterThreshold = options.filterThreshold || defaultOpts.filterThreshold;
 	}
 
 	search(query: string): ISearchItem[] {
@@ -59,7 +60,7 @@ export interface ISearchItem {
 	lastFilterValue : number;
 	onBeginSearch(query : string) : void;
 	readonly tags : string[];
-	pick();
+	pick() : void;
 	score( weights : SearchWeights ) : number;
 	count( num : number ) : number;
 }
@@ -107,7 +108,7 @@ export class SearchItem implements ISearchItem {
 }
 
 export interface IFilter {
-	onBeginSearch(query: string);
+	onBeginSearch(query: string) : void;
 	filter(query: string, element: ISearchItem): number;
 }
 
