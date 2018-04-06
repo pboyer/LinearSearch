@@ -1,13 +1,13 @@
 {
   "name": "linearsearch",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "A lightweight, learning algorithm for searching a homogeneous list of items.",
-  "main": "src/linear.js",
+  "main": "dist/linear.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "test": "node src/test.js"
+    "test": "node dist/test.js"
   },
   "repository": {
     "type": "git",
