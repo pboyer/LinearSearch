@@ -26,11 +26,12 @@ var SearchWeights = /** @class */ (function () {
 exports.SearchWeights = SearchWeights;
 var Search = /** @class */ (function () {
     function Search(options) {
-        options = options || new SearchOptions();
-        this._filter = options.filter;
-        this._items = options.items;
-        this._weights = options.weights;
-        this._filterThreshold = options.filterThreshold;
+        var defaultOpts = new SearchOptions();
+        options = options || defaultOpts;
+        this._filter = options.filter || defaultOpts.filter;
+        this._items = options.items || defaultOpts.items;
+        this._weights = options.weights || defaultOpts.weights;
+        this._filterThreshold = options.filterThreshold || defaultOpts.filterThreshold;
     }
     Search.prototype.search = function (query) {
         var _this = this;

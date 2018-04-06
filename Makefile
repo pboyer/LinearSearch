@@ -1,7 +1,7 @@
 all : build
 
 build:
-	tsc 
+	tsc --declaration
 
 release: build
 	mkdir -p build
